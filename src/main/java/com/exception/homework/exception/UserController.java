@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
-
 @RestController
 
 public class UserController {
@@ -21,27 +19,23 @@ public class UserController {
 
     @GetMapping(path = "/registration")
     public String getRegistrationUser(@RequestParam("login") String login, @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword) {
+
         try {
-            try {
-                final String user = registrationService.registrationUser(login, password, confirmPassword);
+            final String user = registrationService.registrationUser(login, password, confirmPassword);
 
 
-            } catch (WrongLoginException e) {
-                e.printStackTrace();
-                return "Логин может состоять только из латинских букв,_, и цифр размер не более 20 символов";
+        } catch (WrongLoginException e) {
+            e.printStackTrace();
+            return "Логин может состоять только из латинских букв,_, и цифр размер не более 20 символов";
 
-            } catch (WrongPasswordException e)
-            {e.printStackTrace();
+        } catch (WrongPasswordException e) {
+            e.printStackTrace();
 
 
-                return "Пароль может состоять только из латинских букв,_, и цифр размер не более 20 символов";
-            }
-            return "логин " + login + " пароль " + password;
-        } finally {
-
+            return "Пароль может состоять только из латинских букв,_, и цифр размер не более 20 символов";
         }
+        return "логин " + login + " пароль " + password;
 
 
-
-}
+    }
 }
